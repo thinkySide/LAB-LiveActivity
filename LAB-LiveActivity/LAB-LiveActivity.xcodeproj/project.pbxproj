@@ -6,12 +6,71 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		829ECE472D228AA9002EF537 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829ECE462D228AA9002EF537 /* WidgetKit.framework */; };
+		829ECE492D228AA9002EF537 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829ECE482D228AA9002EF537 /* SwiftUI.framework */; };
+		829ECE542D228AAB002EF537 /* LiveTimerActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 829ECE442D228AA9002EF537 /* LiveTimerActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		829ECE522D228AAB002EF537 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82C6DDB32D22626C00F7319C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 829ECE432D228AA9002EF537;
+			remoteInfo = LiveTimerActivityExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		829ECE592D228AAB002EF537 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				829ECE542D228AAB002EF537 /* LiveTimerActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		829ECE442D228AA9002EF537 /* LiveTimerActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveTimerActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		829ECE462D228AA9002EF537 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		829ECE482D228AA9002EF537 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		82C6DDBB2D22626C00F7319C /* LAB-LiveActivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LAB-LiveActivity.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82C6DE062D22652F00F7319C /* LiveTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		829ECE552D228AAB002EF537 /* Exceptions for "LiveTimerActivity" folder in "LiveTimerActivityExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 829ECE432D228AA9002EF537 /* LiveTimerActivityExtension */;
+		};
+		829ECE5D2D228AD1002EF537 /* Exceptions for "LiveTimerActivity" folder in "LiveTimer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LiveTimerActivity.swift,
+			);
+			target = 82C6DE052D22652F00F7319C /* LiveTimer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		829ECE4A2D228AA9002EF537 /* LiveTimerActivity */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				829ECE5D2D228AD1002EF537 /* Exceptions for "LiveTimerActivity" folder in "LiveTimer" target */,
+				829ECE552D228AAB002EF537 /* Exceptions for "LiveTimerActivity" folder in "LiveTimerActivityExtension" target */,
+			);
+			path = LiveTimerActivity;
+			sourceTree = "<group>";
+		};
 		82C6DDBD2D22626C00F7319C /* LAB-LiveActivity */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "LAB-LiveActivity";
@@ -25,6 +84,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		829ECE412D228AA9002EF537 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				829ECE492D228AA9002EF537 /* SwiftUI.framework in Frameworks */,
+				829ECE472D228AA9002EF537 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		82C6DDB82D22626C00F7319C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,11 +110,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		829ECE452D228AA9002EF537 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				829ECE462D228AA9002EF537 /* WidgetKit.framework */,
+				829ECE482D228AA9002EF537 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		82C6DDB22D22626C00F7319C = {
 			isa = PBXGroup;
 			children = (
 				82C6DDBD2D22626C00F7319C /* LAB-LiveActivity */,
 				82C6DE072D22652F00F7319C /* LiveTimer */,
+				829ECE4A2D228AA9002EF537 /* LiveTimerActivity */,
+				829ECE452D228AA9002EF537 /* Frameworks */,
 				82C6DDBC2D22626C00F7319C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +135,7 @@
 			children = (
 				82C6DDBB2D22626C00F7319C /* LAB-LiveActivity.app */,
 				82C6DE062D22652F00F7319C /* LiveTimer.app */,
+				829ECE442D228AA9002EF537 /* LiveTimerActivityExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,6 +143,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		829ECE432D228AA9002EF537 /* LiveTimerActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 829ECE562D228AAB002EF537 /* Build configuration list for PBXNativeTarget "LiveTimerActivityExtension" */;
+			buildPhases = (
+				829ECE402D228AA9002EF537 /* Sources */,
+				829ECE412D228AA9002EF537 /* Frameworks */,
+				829ECE422D228AA9002EF537 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				829ECE4A2D228AA9002EF537 /* LiveTimerActivity */,
+			);
+			name = LiveTimerActivityExtension;
+			packageProductDependencies = (
+			);
+			productName = LiveTimerActivityExtension;
+			productReference = 829ECE442D228AA9002EF537 /* LiveTimerActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		82C6DDBA2D22626C00F7319C /* LAB-LiveActivity */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82C6DDC92D22626D00F7319C /* Build configuration list for PBXNativeTarget "LAB-LiveActivity" */;
@@ -92,10 +194,12 @@
 				82C6DE022D22652F00F7319C /* Sources */,
 				82C6DE032D22652F00F7319C /* Frameworks */,
 				82C6DE042D22652F00F7319C /* Resources */,
+				829ECE592D228AAB002EF537 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				829ECE532D228AAB002EF537 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				82C6DE072D22652F00F7319C /* LiveTimer */,
@@ -117,6 +221,9 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					829ECE432D228AA9002EF537 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					82C6DDBA2D22626C00F7319C = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -141,11 +248,19 @@
 			targets = (
 				82C6DDBA2D22626C00F7319C /* LAB-LiveActivity */,
 				82C6DE052D22652F00F7319C /* LiveTimer */,
+				829ECE432D228AA9002EF537 /* LiveTimerActivityExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		829ECE422D228AA9002EF537 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		82C6DDB92D22626C00F7319C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +278,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		829ECE402D228AA9002EF537 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		82C6DDB72D22626C00F7319C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -179,7 +301,69 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		829ECE532D228AAB002EF537 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 829ECE432D228AA9002EF537 /* LiveTimerActivityExtension */;
+			targetProxy = 829ECE522D228AAB002EF537 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		829ECE572D228AAB002EF537 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9XG4S4XZWN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveTimerActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveTimerActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyside.LiveTimer.LiveTimerActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		829ECE582D228AAB002EF537 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9XG4S4XZWN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveTimerActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveTimerActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkyside.LiveTimer.LiveTimerActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		82C6DDC72D22626D00F7319C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -310,6 +494,7 @@
 				DEVELOPMENT_TEAM = 9XG4S4XZWN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -339,6 +524,7 @@
 				DEVELOPMENT_TEAM = 9XG4S4XZWN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -368,6 +554,7 @@
 				DEVELOPMENT_TEAM = 9XG4S4XZWN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -397,6 +584,7 @@
 				DEVELOPMENT_TEAM = 9XG4S4XZWN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -418,6 +606,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		829ECE562D228AAB002EF537 /* Build configuration list for PBXNativeTarget "LiveTimerActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				829ECE572D228AAB002EF537 /* Debug */,
+				829ECE582D228AAB002EF537 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		82C6DDB62D22626C00F7319C /* Build configuration list for PBXProject "LAB-LiveActivity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

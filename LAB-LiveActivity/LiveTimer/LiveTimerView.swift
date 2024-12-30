@@ -7,8 +7,11 @@
 
 import SwiftUI
 import Combine
+import ActivityKit
 
 struct LiveTimerView: View {
+    
+    @State private var activity: Activity<LiveTimerActivityAttributes>?
     
     @State private var timerCancellabe: AnyCancellable?
     
@@ -38,6 +41,11 @@ struct LiveTimerView: View {
             }
         }
     }
+}
+
+// MARK: - Formatter
+
+extension LiveTimerView {
     
     private var timerFormat: String {
         if isTracking {
@@ -53,12 +61,18 @@ struct LiveTimerView: View {
             return "00:00:00"
         }
     }
+}
+
+// MARK: - Function
+
+extension LiveTimerView {
     
     private func timerActionButtonTapped() {
         isTracking.toggle()
         if isTracking {
             startDate = .now
             endDate = .now + selectedTime.toSeconds
+            startLiveActivity()
             timerCancellabe = Timer.publish(every: 1, on: .main, in: .common)
                 .autoconnect()
                 .sink { _ in
@@ -67,50 +81,37 @@ struct LiveTimerView: View {
         } else {
             timerCancellabe = nil
             estimateSeconds = 0
+            stopLiveActivity()
         }
     }
 }
 
-// MARK: - TimePicker
+// MARK: - Live Activity
 
-private struct TimePicker: View {
+extension LiveTimerView {
     
-    @Binding var selectedTime: Time
-    
-    var body: some View {
-        HStack(spacing: 24) {
-            ForEach(Time.allCases) { time in
-                TimePickerCell(
-                    selectedTime: $selectedTime,
-                    time: time
-                )
-            }
+    private func startLiveActivity() {
+        let attributes = LiveTimerActivityAttributes()
+        let state = LiveTimerActivityAttributes.ContentState(
+            startDate: startDate,
+            endDate: endDate
+        )
+        let content = ActivityContent(state: state, staleDate: nil)
+        
+        do {
+            activity = try Activity<LiveTimerActivityAttributes>.request(
+                attributes: attributes,
+                content: content,
+                pushType: nil
+            )
+        } catch {
+            print("Live Activity 실행 실패: \(error)")
         }
     }
-}
-
-// MARK: - TimePickerCell
-
-private struct TimePickerCell: View {
     
-    @Binding var selectedTime: Time
-    
-    let time: Time
-    
-    private var isSelected: Bool {
-        selectedTime == time
-    }
-    
-    var body: some View {
-        Button {
-            selectedTime = time
-        } label: {
-            Text(time.timeFormat)
-                .padding()
-                .fontWeight(isSelected ? .bold : .medium)
-                .foregroundStyle(isSelected ? .white : .blue)
-                .background(isSelected ? .blue : .clear)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+    private func stopLiveActivity() {
+        Task {
+            await activity?.end(nil, dismissalPolicy: .immediate)
         }
     }
 }
