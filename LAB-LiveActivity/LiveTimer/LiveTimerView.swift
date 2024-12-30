@@ -43,7 +43,12 @@ struct LiveTimerView: View {
         if isTracking {
             let endSeconds = endDate.timeIntervalSince1970
             let startSeconds = startDate.timeIntervalSince1970
-            return (endSeconds - startSeconds - estimateSeconds).timerFormat
+            let timeSeconds = endSeconds - startSeconds - estimateSeconds
+            if timeSeconds >= 0 {
+                return timeSeconds.timerFormat
+            } else {
+                return "+\((timeSeconds - 1).timerFormat)"
+            }
         } else {
             return "00:00:00"
         }

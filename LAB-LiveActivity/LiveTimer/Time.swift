@@ -8,6 +8,7 @@
 import Foundation
 
 enum Time: TimeInterval, CaseIterable, Identifiable {
+    case test = 0.05
     case min30 = 30
     case min60 = 60
     case min90 = 90
@@ -17,7 +18,8 @@ enum Time: TimeInterval, CaseIterable, Identifiable {
     }
     
     var timeFormat: String {
-        "\(Int(self.rawValue))분"
+        if self == .test { return "테스트" }
+        return "\(Int(self.rawValue))분"
     }
     
     var toSeconds: TimeInterval {
