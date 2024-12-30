@@ -11,7 +11,7 @@ import SwiftUI
 struct LAB_LiveActivityApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
