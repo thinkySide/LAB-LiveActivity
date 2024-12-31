@@ -17,6 +17,8 @@ struct LiveTimerActivityAttributes: ActivityAttributes {
         var startDate: Date
         var endDate: Date
     }
+    
+    // 정적 프로퍼티
 }
 
 /// 화면 정의
@@ -28,10 +30,10 @@ struct LiveTimerActivity: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     
@@ -59,5 +61,6 @@ private struct LockScreen: View {
             countsDown: true,
             showsHours: true
         )
+        .font(.system(size: 24, weight: .bold))
     }
 }

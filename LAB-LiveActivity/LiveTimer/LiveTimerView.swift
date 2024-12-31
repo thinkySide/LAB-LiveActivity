@@ -11,6 +11,11 @@ import ActivityKit
 
 struct LiveTimerView: View {
     
+    @AppStorage("resignSeconds") var resignSeconds = UserDefaults.standard.integer(forKey: "resignSeconds")
+    @AppStorage("durationSeconds") var durationSeconds = UserDefaults.standard.integer(forKey: "durationSeconds")
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
     @State private var activity: Activity<LiveTimerActivityAttributes>?
     
     @State private var timerCancellabe: AnyCancellable?
@@ -19,7 +24,7 @@ struct LiveTimerView: View {
     @State private var isTracking = false
     
     @State private var startDate: Date = .now
-    @State private var estimateSeconds: TimeInterval = 0
+    @State private var estimateSeconds = 0
     @State private var endDate: Date = .now
     
     var body: some View {
@@ -40,6 +45,31 @@ struct LiveTimerView: View {
                     .padding(.horizontal, 24)
             }
         }
+        .onChange(of: scenePhase) { oldValue, newValue in
+            guard oldValue != newValue, isTracking else {
+                return
+            }
+            switch newValue {
+            case .background, .inactive:
+                
+                // 나간 시간 저장하기
+                resignSeconds = Int(Date.now.timeIntervalSince1970)
+                durationSeconds = Int(estimateSeconds)
+                
+            case .active:
+                let duringSeconds = Int(Date.now.timeIntervalSince1970) - resignSeconds
+                estimateSeconds = duringSeconds + durationSeconds
+                resetAppStorage()
+                
+            @unknown default:
+                break
+            }
+        }
+    }
+    
+    private func resetAppStorage() {
+        resignSeconds = 0
+        durationSeconds = 0
     }
 }
 
@@ -51,7 +81,7 @@ extension LiveTimerView {
         if isTracking {
             let endSeconds = endDate.timeIntervalSince1970
             let startSeconds = startDate.timeIntervalSince1970
-            let timeSeconds = endSeconds - startSeconds - estimateSeconds
+            let timeSeconds = endSeconds - startSeconds - TimeInterval(estimateSeconds)
             if timeSeconds >= 0 {
                 return timeSeconds.timerFormat
             } else {
