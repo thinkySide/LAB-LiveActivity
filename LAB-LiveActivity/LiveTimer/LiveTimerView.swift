@@ -13,16 +13,14 @@ struct LiveTimerView: View {
     
     @AppStorage("resignSeconds") var resignSeconds = UserDefaults.standard.integer(forKey: "resignSeconds")
     @AppStorage("durationSeconds") var durationSeconds = UserDefaults.standard.integer(forKey: "durationSeconds")
+    @AppStorage("isFromBackground") var isFromBackground = UserDefaults.standard.bool(forKey: "isFromBackground")
     
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var activity: Activity<LiveTimerActivityAttributes>?
-    
     @State private var timerCancellabe: AnyCancellable?
-    
     @State private var selectedTime: Time = .min60
     @State private var isTracking = false
-    
     @State private var startDate: Date = .now
     @State private var estimateSeconds = 0
     @State private var endDate: Date = .now
@@ -46,25 +44,37 @@ struct LiveTimerView: View {
             }
         }
         .onChange(of: scenePhase) { oldValue, newValue in
-            guard oldValue != newValue, isTracking else {
-                return
-            }
+            guard oldValue != newValue, isTracking else { return }
             switch newValue {
-            case .background, .inactive:
+            case .background:
+                saveAppStorage()
+                isFromBackground = true
                 
-                // 나간 시간 저장하기
-                resignSeconds = Int(Date.now.timeIntervalSince1970)
-                durationSeconds = Int(estimateSeconds)
+            case .inactive:
+                break
                 
             case .active:
-                let duringSeconds = Int(Date.now.timeIntervalSince1970) - resignSeconds
-                estimateSeconds = duringSeconds + durationSeconds
-                resetAppStorage()
+                if isFromBackground {
+                    let duringSeconds = Int(Date.now.timeIntervalSince1970) - resignSeconds
+                    estimateSeconds = duringSeconds + durationSeconds
+                    resetAppStorage()
+                    isFromBackground = false
+                }
                 
             @unknown default:
                 break
             }
         }
+    }
+}
+
+// MARK: - AppStorage
+
+extension LiveTimerView {
+    
+    private func saveAppStorage() {
+        resignSeconds = Int(Date.now.timeIntervalSince1970)
+        durationSeconds = Int(estimateSeconds)
     }
     
     private func resetAppStorage() {
@@ -112,6 +122,7 @@ extension LiveTimerView {
             timerCancellabe = nil
             estimateSeconds = 0
             stopLiveActivity()
+            resetAppStorage()
         }
     }
 }
@@ -120,6 +131,7 @@ extension LiveTimerView {
 
 extension LiveTimerView {
     
+    /// 라이브 액티비티 시작하기
     private func startLiveActivity() {
         let attributes = LiveTimerActivityAttributes()
         let state = LiveTimerActivityAttributes.ContentState(
@@ -139,6 +151,7 @@ extension LiveTimerView {
         }
     }
     
+    /// 라이브 액티비티 종료하기
     private func stopLiveActivity() {
         Task {
             await activity?.end(nil, dismissalPolicy: .immediate)
